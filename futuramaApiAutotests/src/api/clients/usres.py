@@ -22,3 +22,19 @@ def get_user_info(client,access_token: str):
         "Authorization": f"Bearer {access_token}"
     }
     return client.get(f"{suffix_url}/me", headers=headers)
+def change_user_info(client,access_token: str, name: str =None, Surname: str =None, Middlename: str =None, Password: str =None, Issubscribed: bool = None):
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    json_body = {}
+    if name:
+        json_body['name'] = name
+    if Surname:
+        json_body['surname'] = Surname
+    if Middlename:
+        json_body['middleName'] = Middlename
+    if Password:
+        json_body['password'] = Password
+    if Issubscribed:
+        json_body['isSubscribed'] = Issubscribed
+    return client.put(suffix_url,headers=headers, json=json_body)
