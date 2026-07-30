@@ -21,3 +21,10 @@ class TestUsers:
         response = get_user_info(self.client, access_token=response_token.json()['access_token'])
         print(self.client.base_url)
         assert response.status_code == 200
+    def test_change_user_info(self):
+        """Смена данных о пользователе"""
+        new_name = "change_name"
+        new_surname = "change_surname"
+        response_token = get_token(self.client, username=os.getenv("username_EP"), password=os.getenv("password_EP"))
+        response = change_user_info(self.client, access_token=response_token.json()['access_token'],name=new_name,Surname=new_surname)
+        assert response.status_code == 200
